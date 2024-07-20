@@ -1,11 +1,9 @@
-import { Search } from "@/search/search"
+import { Recipes } from "./pages/recipes/recipes.page";
 
 export const App = () => {
   return (
-    <>
-      <Search />
-    </>
-  )
-}
+    <Recipes />
+  );
+};
 
-export default App
+export default App;

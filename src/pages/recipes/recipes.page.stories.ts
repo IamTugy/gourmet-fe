@@ -8,5 +8,6 @@ export default {
   tags: ["autodocs"],
 } satisfies Meta<typeof Recipes>;
 
-export const Default: StoryObj<typeof Recipes> = {
-} satisfies StoryObj<typeof Recipes>;
+export const Default: StoryObj<typeof Recipes> = {} satisfies StoryObj<
+  typeof Recipes
+>;

@@ -1,5 +1,4 @@
-import { twMerge } from 'tailwind-merge';
-
+import { twMerge } from "tailwind-merge";
 
 type FontVariationSettings = {
   FILL?: number;
@@ -7,7 +6,6 @@ type FontVariationSettings = {
   GRAD?: number;
   opsz?: number;
 };
-
 
 export const Icon = ({
   className,
@@ -20,7 +18,8 @@ export const Icon = ({
 }: {
   iconName: string;
   className?: string;
-} & FontVariationSettings & React.ComponentProps<"span">) => (
+} & FontVariationSettings &
+  React.ComponentProps<"span">) => (
   <span
     style={{
       fontVariationSettings: `'FILL' ${FILL}, 'wght' ${wght}, 'GRAD' ${GRAD}, 'opsz' ${opsz}`,
