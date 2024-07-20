@@ -1,0 +1,42 @@
+export const mockGetRecipesResponse = {
+    items: [
+        {
+            id: 1,
+            name: "Recipe 1",
+            description: "Recipe 1 description",
+            kitchen: "Asian",
+            author: "Author 1",
+            rating: 7.2,
+            thumbnail: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMX0mAaE6DKGj6rLemTEYGDh8c-wtNLO0N-Q&s",
+        }, {
+            id: 2,
+            name: "Recipe 2",
+            description: "Recipe 2 description",
+            kitchen: "Italian",
+            author: "Author 2",
+            rating: 4.5,
+            thumbnail: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMX0mAaE6DKGj6rLemTEYGDh8c-wtNLO0N-Q&s",
+        },
+        {
+            id: 3,
+            name: "Recipe 3",
+            description: "Recipe 3 description",
+            kitchen: "Italian",
+            author: "Author 3",
+            rating: 8.9,
+            thumbnail: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMX0mAaE6DKGj6rLemTEYGDh8c-wtNLO0N-Q&s",
+        },
+        {
+            id: 4,
+            name: "Recipe 4",
+            description: "Recipe 4 description",
+            kitchen: "Italian",
+            author: "Author 4",
+            rating: 6.7,
+            thumbnail: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMX0mAaE6DKGj6rLemTEYGDh8c-wtNLO0N-Q&s",
+        },
+    ],
+    limit: 10,
+    offset: 0,
+    total: 4,
+} as const;

@@ -1,2 +1,1 @@
-# cookeat
-cook app with embedded AI
+# Cookeat ai
