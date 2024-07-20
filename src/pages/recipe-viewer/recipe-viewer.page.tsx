@@ -1,41 +1,54 @@
 import pluralize from "pluralize";
 import { Icon } from "@/icon/icon";
-import { mockRecipeData } from "~/mock-data";
+import { mockUser } from "~/mock-data";
 import { Route } from "~/routes/recipes/$recipeId";
+import { Recipe } from "~/models/recipe";
+import { User } from "~/models/user";
+import recipeData from "~/assets/recipes/brioche";
+import { useEffect } from "react";
 
-export const RecipeViewer = ({}: {}) => {
+export const RecipeViewer = () => {
   const { recipeId } = Route.useParams();
-  const recipe = mockRecipeData;
+  const recipe = Recipe.parse(recipeData);
+  const author = User.parse(mockUser);
+
+  useEffect(() => {
+    document.title = recipe.name;
+    if (recipe.language === "hebrew") {
+      document.dir = "rtl";
+    }
+  }, [recipe]);
+
   return (
     <main className="w-screen">
       <header className="flex justify-between p-2 items-center" dir="ltr">
         <div className="flex flex-center gap-3">
           <Icon iconName="account_circle" className="text-gray-500" />
           <div className="flex flex-col">
-            <h1 className="text-xl font-bold">{recipe.author}</h1>
-            <h2 className="text-xs text-gray-500">{recipe.author_hashtag}</h2>
+            <h1 className="text-xl font-bold">{author.name}</h1>
+            <h2 className="text-xs text-gray-500">{author.hashtag}</h2>
           </div>
         </div>
       </header>
       <img
-        src={recipe.image}
+        src={recipe.image_url}
         alt={recipe.name}
-        className="w-full aspect-[4/2]"
+        className="w-full"
       />
       <h1 className="text-2xl font-bold p-2">{recipe.name}</h1>
       <p className="text-sm p-2 text-gray-600">{recipe.description}</p>
-      <img
-        src={recipe.ingredients_image}
+      {recipe.ingredients_image_url && <img
+        src={recipe.ingredients_image_url}
         alt="Ingredients"
-        className="w-full"
-      />
-      <h2 className="text-lg p-2 font-bold">Mise en place</h2>
-      <h3 className="text-md p-2 font-bold">Equipment</h3>
+        className="w-full p-2"
+      />}
+      <h2 className="text-lg px-2 font-bold">Mise en place</h2>
+      {recipe.equipment && (<><h3 className="text-md p-2 font-bold">Equipment</h3>
       <ul className="px-8 list-disc">
         {recipe.equipment.map((equipment) => (
           <li key={equipment}>{equipment}</li>
         ))}
-      </ul>
+      </ul></>)}
       <h3 className="text-md p-2 font-bold">Ingredients</h3>
       <table className="flex w-fit pl-3">
         <tbody>

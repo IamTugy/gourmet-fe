@@ -1,7 +1,7 @@
 export const mockGetRecipesResponse = {
   items: [
     {
-      id: 1,
+      id: "1",
       name: "Recipe 1",
       description: "Recipe 1 description",
       kitchen: "Asian",
@@ -47,7 +47,7 @@ export const mockGetRecipesResponse = {
 } as const;
 
 export const mockRecipeData = {
-  id: 1,
+  id: "1",
   name: "Best Homemade Brownies",
   description:
     "The BEST brownie recipe! With crispy edges, fudgy middles, and rich chocolate flavor, these homemade brownies will disappear in no time.",
@@ -56,10 +56,9 @@ export const mockRecipeData = {
   servings: 16,
   servings_unit: "brownies",
   kitchen: "Asian",
-  author: "Michael Tugendhaft",
-  author_hashtag: "@tugy",
+  author_id: "1",
   equipment: ["8x8 Baking Dish", "Cooking Spray", "Parchment Paper"],
-  ingredients_image:
+  ingredients_image_url:
     "https://cdn.loveandlemons.com/wp-content/uploads/2020/01/the-best-brownie-recipe-580x829.jpg",
   ingredients: [
     {
@@ -155,8 +154,15 @@ export const mockRecipeData = {
     },
   ],
   rating: 7.2,
-  thumbnail:
+  thumbnail_url:
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMX0mAaE6DKGj6rLemTEYGDh8c-wtNLO0N-Q&s",
-  image:
+  image_url:
     "https://www.thespruceeats.com/thmb/88LQtV3VXf_jsqMMwvcs6hlhmxM=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/one-bowl-brownies-4766996-hero-05-b953ecd618cd4007826ad6d1c6f226f3.jpg",
+} as const;
+
+export const mockUser = {
+    id: "1",
+    name: "Michael Tugendhaft",
+    hashtag: "@tugy",
+    image_url: "https://avatars.githubusercontent.com/u/31568827?v=4",
 } as const;
