@@ -4,12 +4,12 @@ import { mockUser } from "~/mock-data";
 import { Route } from "~/routes/recipes/$recipeId";
 import { Recipe } from "~/models/recipe";
 import { User } from "~/models/user";
-import recipeData from "~/assets/recipes/brioche";
 import { useEffect } from "react";
+import { recipes } from "~/assets/recipes";
 
 export const RecipeViewer = () => {
   const { recipeId } = Route.useParams();
-  const recipe = Recipe.parse(recipeData);
+  const recipe = Recipe.parse(recipes.find((recipe) => recipe.id === recipeId));
   const author = User.parse(mockUser);
 
   useEffect(() => {
