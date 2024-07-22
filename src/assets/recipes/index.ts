@@ -1,5 +1,7 @@
-import brioche from "./brioche"
+import brioche_dough from "./brioche_dough"
+import croissant_dough from "./croissant_dough"
 
 export const recipes = [
-    brioche,
+    brioche_dough,
+    croissant_dough,
 ] as const;

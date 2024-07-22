@@ -4,43 +4,46 @@ export default {
     "name": "בצק בריוש",
     "description": "",
     "language": "hebrew",
-    "ingredients": [
+    "ingredient_sections": [{
+        "name": "חומרים",
+        "ingredients": [
         {
-            "name": "קמח לחם",
+            "id": "1",
             "quantity": 400,
             "unit": "גרם"
         },
         {
+            "id": "2",
             "name": "שמרים יבשים",
             "quantity": 13,
             "unit": "גרם"
         },
         {
-            "name": "ביצים",
+            "id": "3",
             "quantity": 100,
             "unit": "גרם"
         },
         {
-            "name": "סוכר",
+            "id": "4",
             "quantity": 35,
             "unit": "גרם"
         },
         {
-            "name": "מלח",
+            "id": "5",
             "quantity": 7,
             "unit": "גרם"
         },
         {
-            "name": "חלב",
+            "id": "6",
             "quantity": 150,
             "unit": "גרם"
         },
         {
-            "name": "חמאה",
+            "id": "7",
             "quantity": 200,
             "unit": "גרם"
         }
-    ],
+    ]}],
     "instructions": [
         {
             "step": 1,

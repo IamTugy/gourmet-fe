@@ -6,11 +6,16 @@ import { useMemo, useState } from "react";
 
 export const Recipes = ({ isGrid = true }: { isGrid?: boolean }) => {
   const [search, setSearch] = useState("");
+
   const data = useMemo(() => {
     return recipes.filter((recipe) =>
       recipe.name.toLowerCase().includes(search.toLowerCase())
     );
   }, [search]);
+
+  document.title = "CookEat.ai";
+  document.dir = "ltr";
+
   return (
     <main className="flex flex-col gap-4 p-2">
       <h1 className="text-xl font-bold">Discover Best Recipes</h1>

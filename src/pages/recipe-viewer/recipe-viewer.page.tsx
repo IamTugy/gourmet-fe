@@ -1,4 +1,5 @@
 import pluralize from "pluralize";
+import {z} from 'zod';
 import { Icon } from "@/icon/icon";
 import { mockUser } from "~/mock-data";
 import { Route } from "~/routes/recipes/$recipeId";
@@ -6,6 +7,32 @@ import { Recipe } from "~/models/recipe";
 import { User } from "~/models/user";
 import { useEffect } from "react";
 import { recipes } from "~/assets/recipes";
+import { IngredientOptiions } from "~/assets/ingredients";
+import { IngredientOption } from "~/models/saved_data";
+
+const IngredientsList = ({ ingredients, language }: { ingredients: z.infer<typeof Recipe>["ingredient_sections"][0]["ingredients"],
+language: z.infer<typeof Recipe>["language"]
+ }) => {
+  const ingredientOptions = z.array(IngredientOption).parse(IngredientOptiions)
+  return <table className="flex w-fit pl-3">
+    <tbody>
+      {ingredients.map((ingredient) => (
+        <tr key={ingredient.id}>
+          <td className="px-3">
+            <input type="checkbox" />
+          </td>
+          <td>
+            {ingredient.quantity}{" "}
+            {pluralize(ingredient.unit, ingredient.quantity)}
+          </td>
+          <td className="px-3">{
+            ingredientOptions.find((option) => option.id === ingredient.id)?.name[language]
+          }</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+}
 
 export const RecipeViewer = () => {
   const { recipeId } = Route.useParams();
@@ -14,6 +41,7 @@ export const RecipeViewer = () => {
 
   useEffect(() => {
     document.title = recipe.name;
+    document.dir = "ltr";
     if (recipe.language === "hebrew") {
       document.dir = "rtl";
     }
@@ -49,23 +77,14 @@ export const RecipeViewer = () => {
           <li key={equipment}>{equipment}</li>
         ))}
       </ul></>)}
-      <h3 className="text-md p-2 font-bold">Ingredients</h3>
-      <table className="flex w-fit pl-3">
-        <tbody>
-          {recipe.ingredients.map((ingredient) => (
-            <tr key={ingredient.name}>
-              <td className="px-3">
-                <input type="checkbox" />
-              </td>
-              <td>
-                {ingredient.quantity}{" "}
-                {pluralize(ingredient.unit, ingredient.quantity)}
-              </td>
-              <td className="px-3">{ingredient.name}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      {
+        recipe.ingredient_sections.map((section) => (
+          <div key={section.name}>
+            <h3 className="text-md p-2 font-bold">{section.name}</h3>
+            <IngredientsList ingredients={section.ingredients} language={recipe.language} />
+          </div>
+        ))
+      }
       <h2 className="text-lg p-2 font-bold">Instructions</h2>
       <ol className="px-8 list-decimal">
         {recipe.instructions.map((instruction) => (
