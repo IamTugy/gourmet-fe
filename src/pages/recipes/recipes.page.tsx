@@ -19,7 +19,7 @@ export const Recipes = ({ isGrid = true }: { isGrid?: boolean }) => {
   return (
     <main className="flex flex-col gap-4 p-2">
       <h1 className="text-xl font-bold">Discover Best Recipes</h1>
-      <Search 
+      <Search
         placeholder="Search All Recipes"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
@@ -29,7 +29,12 @@ export const Recipes = ({ isGrid = true }: { isGrid?: boolean }) => {
         <section className="grid-cols-2 grid gap-4">
           {data.map((recipe) => {
             return (
-              <Link to={`/recipes/${recipe.id}`} key={recipe.id} className="flex flex-col" dir={recipe.language === "hebrew" ? "rtl" : "ltr"}>
+              <Link
+                to={`/recipes/${recipe.id}`}
+                key={recipe.id}
+                className="flex flex-col"
+                dir={recipe.language === "hebrew" ? "rtl" : "ltr"}
+              >
                 <img
                   className="rounded-lg aspect-[4/3]"
                   src={recipe.thumbnail_url}
@@ -53,7 +58,11 @@ export const Recipes = ({ isGrid = true }: { isGrid?: boolean }) => {
         <section className="flex flex-col gap-4">
           {data.map((recipe) => {
             return (
-              <Link to={`/recipes/${recipe.id}`} key={recipe.id} className="flex flex-row h-24 w-full gap-4">
+              <Link
+                to={`/recipes/${recipe.id}`}
+                key={recipe.id}
+                className="flex flex-row h-24 w-full gap-4"
+              >
                 <img
                   className="rounded-lg w-28"
                   src={recipe.thumbnail_url}

@@ -1,9 +1,7 @@
 import { Recipes } from "./pages/recipes/recipes.page";
 
 export const App = () => {
-  return (
-    <Recipes />
-  );
+  return <Recipes />;
 };
 
 export default App;

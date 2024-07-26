@@ -161,8 +161,8 @@ export const mockRecipeData = {
 } as const;
 
 export const mockUser = {
-    id: "1",
-    name: "Michael Tugendhaft",
-    hashtag: "@tugy",
-    image_url: "https://avatars.githubusercontent.com/u/31568827?v=4",
+  id: "1",
+  name: "Michael Tugendhaft",
+  hashtag: "@tugy",
+  image_url: "https://avatars.githubusercontent.com/u/31568827?v=4",
 } as const;
