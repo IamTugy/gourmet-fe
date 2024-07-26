@@ -1,13 +1,14 @@
 import { Icon } from "@/icon/icon";
-import { useAuth } from "~/context/AuthContext";
+import { useAuth0 } from "@auth0/auth0-react";
+
 
 export const CurrentUser = () => {
-  const { user, googleSignIn, signOut } = useAuth();
+  const { user, loginWithRedirect, logout } = useAuth0();
 
   if (!user) {
     return (
       <button
-        onClick={googleSignIn}
+        onClick={() => loginWithRedirect()}
         className="border-2 rounded-full px-3 hover:bg-gray-200"
       >
         Log In
@@ -15,19 +16,20 @@ export const CurrentUser = () => {
     );
   }
 
-  return user.photoURL ? (
+  return user.picture ? (
     <img
-      title={user.displayName || user.uid}
-      src={user.photoURL || ""}
-      alt={user.displayName || ""}
+      title={user.name}
+      src={user.picture}
+      alt={user.name}
       className="w-7 h-7 rounded-full"
-      onClick={signOut}
+      onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}
     />
   ) : (
     <Icon
       iconName="account_circle"
+      title={user.name}
       className="text-gray-500 w-7 h-7 flex-center text-3xl"
-      onClick={signOut}
+      onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}
     />
   );
 };
