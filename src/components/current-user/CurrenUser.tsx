@@ -1,9 +1,14 @@
 import { Icon } from "@/icon/icon";
+import { Loader } from "@/loader/Loader";
 import { useAuth0 } from "@auth0/auth0-react";
 
 
 export const CurrentUser = () => {
-  const { user, loginWithRedirect, logout } = useAuth0();
+  const { user, loginWithRedirect, logout, isLoading} = useAuth0();
+
+  if (isLoading) {
+    return <Loader className="h-7 w-7 text-gray-400" />;
+  }
 
   if (!user) {
     return (
