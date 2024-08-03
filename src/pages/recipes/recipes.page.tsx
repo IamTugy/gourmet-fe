@@ -1,17 +1,22 @@
 import { Search } from "@/search/search";
 import { Icon } from "@/icon/icon";
 import { Link } from "@tanstack/react-router";
-import { recipes } from "~/assets/recipes";
 import { useMemo, useState } from "react";
+import { $api } from "~/lib/api/v1/client";
 
 export const Recipes = ({ isGrid = true }: { isGrid?: boolean }) => {
   const [search, setSearch] = useState("");
+  const { data: recipes, isLoading } = $api.useQuery("get", "/recipes/");
 
   const data = useMemo(() => {
-    return recipes.filter((recipe) =>
-      recipe.name.toLowerCase().includes(search.toLowerCase())
+    return (
+      recipes?.filter((recipe) =>
+        recipe.title.toLowerCase().includes(search.toLowerCase())
+      ) ?? []
     );
-  }, [search]);
+  }, [search, recipes]);
+
+  if (isLoading) return <div>Loading...</div>;
 
   document.title = "CookEat.ai";
   document.dir = "ltr";
@@ -37,11 +42,11 @@ export const Recipes = ({ isGrid = true }: { isGrid?: boolean }) => {
               >
                 <img
                   className="rounded-lg aspect-[4/3]"
-                  src={recipe.thumbnail_url}
-                  alt={recipe.name}
+                  src={recipe.thumb_image_url}
+                  alt={recipe.title}
                 />
                 <div className="flex justify-between">
-                  <h2>{recipe.name}</h2>
+                  <h2>{recipe.title}</h2>
                   <div className="flex items-center">
                     <p className="text-gray-500 text-xs">{recipe.rating}</p>
                     <Icon
@@ -65,11 +70,11 @@ export const Recipes = ({ isGrid = true }: { isGrid?: boolean }) => {
               >
                 <img
                   className="rounded-lg w-28"
-                  src={recipe.thumbnail_url}
-                  alt={recipe.name}
+                  src={recipe.thumb_image_url}
+                  alt={recipe.title}
                 />
                 <div className="flex flex-col flex-1 border-b-2 justify-center">
-                  <h2 className="text-lg">{recipe.name}</h2>
+                  <h2 className="text-lg">{recipe.title}</h2>
                   <p className="text-sm text-gray-500">{recipe.description}</p>
                   <div className="flex items-center">
                     <p className="text-gray-500 text-xs">{recipe.rating}</p>

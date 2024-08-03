@@ -20,7 +20,7 @@
     /* Paths */
     "paths": {
       "@/*": ["./src/components/*"],
-      "~/*": ["./src/*"]
+      "~/*": ["./src/*"],
     },
 
     /* Linting */

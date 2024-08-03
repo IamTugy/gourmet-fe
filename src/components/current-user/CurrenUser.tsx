@@ -1,5 +1,5 @@
 import { Icon } from "@/icon/icon";
-import { Loader } from "@/loader/Loader";
+import { Loader } from "@/loader/loader";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export const CurrentUser = () => {
