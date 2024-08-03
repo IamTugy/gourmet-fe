@@ -5,9 +5,7 @@ import { withRouter } from "~/utils/storybook-router";
 
 export default {
   title: "pages/recipes",
-  decorators: [
-    withRouter
-  ],
+  decorators: [withRouter(["/recipes/"])],
   component: Recipes,
   tags: ["autodocs"],
 } satisfies Meta<typeof Recipes>;
