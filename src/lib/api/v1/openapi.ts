@@ -4,340 +4,317 @@
  */
 
 export interface paths {
-  "/recipes/": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/recipes/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Read Recipes */
+        get: operations["read_recipes_recipes__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /** Read Recipes */
-    get: operations["read_recipes_recipes__get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/recipes/{recipe_id}": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/recipes/{recipe_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Read Recipe */
+        get: operations["read_recipe_recipes__recipe_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /** Read Recipe */
-    get: operations["read_recipe_recipes__recipe_id__get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Root */
+        get: operations["root__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /** Root */
-    get: operations["root__get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
 }
 export type webhooks = Record<string, never>;
 export interface components {
-  schemas: {
-    /** Block */
-    Block: {
-      type: components["schemas"]["BlockType"];
+    schemas: {
+        /** Block */
+        Block: {
+            type: components["schemas"]["BlockType"];
+        };
+        /**
+         * BlockType
+         * @enum {string}
+         */
+        BlockType: "image" | "title" | "subtitle" | "text" | "list" | "indented_block";
+        /** HTTPValidationError */
+        HTTPValidationError: {
+            /** Detail */
+            detail?: components["schemas"]["ValidationError"][];
+        };
+        /** ImageBlock */
+        ImageBlock: {
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "image";
+            /** Url */
+            url: string;
+        };
+        /** IndentedBlock */
+        IndentedBlock: {
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "indented_block";
+            block: components["schemas"]["Block"];
+        };
+        /** IngredientListItem */
+        IngredientListItem: {
+            /** Text */
+            text: string;
+            /** Quantity */
+            quantity?: number | null;
+            /** Unit */
+            unit?: string | null;
+            /** Note */
+            note?: string | null;
+        };
+        /** ListBlock */
+        ListBlock: {
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "list";
+            list_type: components["schemas"]["ListType"];
+            /** Header */
+            header?: string | null;
+            /** Items */
+            items: (string | components["schemas"]["IngredientListItem"])[];
+        };
+        /**
+         * ListType
+         * @enum {string}
+         */
+        ListType: "numbered" | "bulleted" | "checklist";
+        /** Recipe */
+        Recipe: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /**
+             * Creator Id
+             * Format: uuid
+             */
+            creator_id: string;
+            /** Language */
+            language: string;
+            /** Title */
+            title: string;
+            /** Description */
+            description: string;
+            /** Image Url */
+            image_url: string;
+            /** Thumb Image Url */
+            thumb_image_url: string;
+            /** Steps */
+            steps: (components["schemas"]["ImageBlock"] | components["schemas"]["TitleBlock"] | components["schemas"]["SubtitleBlock"] | components["schemas"]["TextBlock"] | components["schemas"]["ListBlock"] | components["schemas"]["IndentedBlock"])[][];
+            /** Ingredients */
+            ingredients: (components["schemas"]["IndentedBlock"] | components["schemas"]["ListBlock"] | components["schemas"]["TitleBlock"])[];
+            /**
+             * Rating
+             * @default 0
+             */
+            rating: number;
+            /**
+             * Likes
+             * @default 0
+             */
+            likes: number;
+        };
+        /** SubtitleBlock */
+        SubtitleBlock: {
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "subtitle";
+            /** @default md */
+            size: components["schemas"]["TextSize"];
+            /**
+             * Bold
+             * @default false
+             */
+            bold: boolean;
+            /** Text */
+            text: string;
+        };
+        /** TextBlock */
+        TextBlock: {
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "text";
+            /** @default md */
+            size: components["schemas"]["TextSize"];
+            /**
+             * Bold
+             * @default false
+             */
+            bold: boolean;
+            /** Text */
+            text: string;
+        };
+        /**
+         * TextSize
+         * @enum {string}
+         */
+        TextSize: "xs" | "sm" | "md" | "lg" | "xl";
+        /** TitleBlock */
+        TitleBlock: {
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "title";
+            /** @default lg */
+            size: components["schemas"]["TextSize"];
+            /**
+             * Bold
+             * @default false
+             */
+            bold: boolean;
+            /** Text */
+            text: string;
+        };
+        /** ValidationError */
+        ValidationError: {
+            /** Location */
+            loc: (string | number)[];
+            /** Message */
+            msg: string;
+            /** Error Type */
+            type: string;
+        };
     };
-    /**
-     * BlockType
-     * @enum {string}
-     */
-    BlockType:
-      | "image"
-      | "title"
-      | "subtitle"
-      | "text"
-      | "list"
-      | "indented_block";
-    /** HTTPValidationError */
-    HTTPValidationError: {
-      /** Detail */
-      detail?: components["schemas"]["ValidationError"][];
-    };
-    /** ImageBlock */
-    ImageBlock: {
-      /**
-       * Type
-       * @constant
-       * @enum {string}
-       */
-      type: "image";
-      /** Url */
-      url: string;
-    };
-    /** IndentedBlock */
-    IndentedBlock: {
-      /**
-       * Type
-       * @constant
-       * @enum {string}
-       */
-      type: "indented_block";
-      block: components["schemas"]["Block"];
-    };
-    /** IngredientListItem */
-    IngredientListItem: {
-      /** Text */
-      text: string;
-      /** Quantity */
-      quantity?: number | null;
-      /** Unit */
-      unit?: string | null;
-      /** Note */
-      note?: string | null;
-    };
-    /** ListBlock */
-    ListBlock: {
-      /**
-       * Type
-       * @constant
-       * @enum {string}
-       */
-      type: "list";
-      list_type: components["schemas"]["ListType"];
-      /** Header */
-      header?: string | null;
-      /** Items */
-      items: (string | components["schemas"]["IngredientListItem"])[];
-    };
-    /**
-     * ListType
-     * @enum {string}
-     */
-    ListType: "numbered" | "bulleted" | "checklist";
-    /** Recipe */
-    Recipe: {
-      /**
-       * Id
-       * Format: uuid
-       */
-      id: string;
-      /**
-       * Creator Id
-       * Format: uuid
-       */
-      creator_id: string;
-      /** Language */
-      language: string;
-      /** Title */
-      title: string;
-      /** Description */
-      description: string;
-      /** Image Url */
-      image_url: string;
-      /** Thumb Image Url */
-      thumb_image_url: string;
-      /** Steps */
-      steps: (
-        | components["schemas"]["ImageBlock"]
-        | components["schemas"]["TitleBlock"]
-        | components["schemas"]["SubtitleBlock"]
-        | components["schemas"]["TextBlock"]
-        | components["schemas"]["ListBlock"]
-        | components["schemas"]["IndentedBlock"]
-      )[][];
-      /** Ingredients */
-      ingredients: (
-        | components["schemas"]["IndentedBlock"]
-        | components["schemas"]["ListBlock"]
-        | components["schemas"]["TitleBlock"]
-      )[];
-      /**
-       * Rating
-       * @default 0
-       */
-      rating: number;
-      /**
-       * Likes
-       * @default 0
-       */
-      likes: number;
-    };
-    /** SubtitleBlock */
-    SubtitleBlock: {
-      /**
-       * Type
-       * @constant
-       * @enum {string}
-       */
-      type: "subtitle";
-      /** @default md */
-      size: components["schemas"]["TextSize"];
-      /**
-       * Bold
-       * @default false
-       */
-      bold: boolean;
-      /** Text */
-      text: string;
-    };
-    /** TextBlock */
-    TextBlock: {
-      /**
-       * Type
-       * @constant
-       * @enum {string}
-       */
-      type: "text";
-      /** @default md */
-      size: components["schemas"]["TextSize"];
-      /**
-       * Bold
-       * @default false
-       */
-      bold: boolean;
-      /** Text */
-      text: string;
-    };
-    /**
-     * TextSize
-     * @enum {string}
-     */
-    TextSize: "xs" | "sm" | "md" | "lg" | "xl";
-    /** TitleBlock */
-    TitleBlock: {
-      /**
-       * Type
-       * @constant
-       * @enum {string}
-       */
-      type: "title";
-      /** @default lg */
-      size: components["schemas"]["TextSize"];
-      /**
-       * Bold
-       * @default false
-       */
-      bold: boolean;
-      /** Text */
-      text: string;
-    };
-    /** ValidationError */
-    ValidationError: {
-      /** Location */
-      loc: (string | number)[];
-      /** Message */
-      msg: string;
-      /** Error Type */
-      type: string;
-    };
-  };
-  responses: never;
-  parameters: never;
-  requestBodies: never;
-  headers: never;
-  pathItems: never;
+    responses: never;
+    parameters: never;
+    requestBodies: never;
+    headers: never;
+    pathItems: never;
 }
 export type $defs = Record<string, never>;
 export interface operations {
-  read_recipes_recipes__get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    read_recipes_recipes__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Recipe"][];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
     };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
+    read_recipe_recipes__recipe_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                recipe_id: string;
+            };
+            cookie?: never;
         };
-        content: {
-          "application/json": components["schemas"]["Recipe"][];
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Recipe"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
         };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
     };
-  };
-  read_recipe_recipes__recipe_id__get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        recipe_id: string;
-      };
-      cookie?: never;
+    root__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+        };
     };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["Recipe"];
-        };
-      };
-      /** @description Not found */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
-    };
-  };
-  root__get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": unknown;
-        };
-      };
-    };
-  };
 }
